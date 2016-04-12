@@ -57,7 +57,6 @@ chartApp.directive('d3Bars', ['d3Service', function(d3Service) {
                             return xScale(d.date);
                         },
                         y: function(d){
-                            console.log(dataset.length)
                             return yScale(Math.max(0, d.pnl)); 
                         },
                         width: xScale.rangeBand(),
@@ -99,7 +98,6 @@ chartApp.directive('d3Bars', ['d3Service', function(d3Service) {
                     function sortChoice(){
                             var state = d3.selectAll("option");
                             var sort = d3.selectAll(".checkbox");
-                            console.log(sort, "sort")
 
                             if(sort[0][0].checked){
                                 var out = function(a,b){return b.pnl - a.pnl;}
@@ -126,19 +124,11 @@ chartApp.directive('d3Bars', ['d3Service', function(d3Service) {
                     })
             }
 
-            d3.json("data.json", function(error,data){
-                if(error){
-                    console.log(error);
-                }
-                else{
-                    console.log(data.timeseries.length/ 60)
-                    var curData = data.timeseries.slice(0, 60);
-                    allData = data
-                    console.log("this is curData", curData)
-                    dataset = curData;
-                    chart(dataset);
-                }
-            });
+            allData = data
+            var curData = data.timeseries.slice(0, 60);
+            dataset = curData;
+            chart(dataset);
+
             d3.selectAll("select").
                 on("change", function(){
                     d3.select("svg").remove()

@@ -1,4 +1,4 @@
-{
+var data = {
   "cash_generation": 432.4,
   "fraction_year_passed": 0.2438,
   "annual_risk": 0.0741,
